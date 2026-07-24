@@ -23,7 +23,7 @@
   --shadow-lift: 0 2px 4px rgba(1, 37, 55, 0.07), 0 18px 40px rgba(1, 37, 55, 0.14);
 
   --maxw: 1200px;
-  --pad: clamp(1.25rem, 4vw, 3rem);
+  --pad: clamp(1.5rem, 6vw, 3rem);
   --radius: 8px;
   --pill: 32px;
   --dur: 0.25s;
@@ -128,7 +128,8 @@ h3 { font-size: 1.05rem; }
   align-items: center;
   justify-content: space-between;
   gap: 1.25rem;
-  padding: 0.85rem 0;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
 }
 
 .emergency-badge {
@@ -210,7 +211,7 @@ h3 { font-size: 1.05rem; }
   background-position: center;
   color: rgba(255,255,255,0.9);
 }
-.hero-inner { position: relative; padding: clamp(3rem, 8vw, 5rem) 0 clamp(3rem, 6vw, 4rem); width: 100%; }
+.hero-inner { position: relative; padding-top: clamp(3rem, 8vw, 5rem); padding-bottom: clamp(3rem, 6vw, 4rem); width: 100%; }
 .hero .eyebrow-white { color: var(--white); font-size: 1.05rem; font-weight: 700; text-align: right; margin-bottom: 1rem; }
 .hero h1 { color: var(--white); max-width: 16ch; font-size: clamp(2.4rem, 6vw, 4rem); }
 .hero .lead { color: rgba(255,255,255,0.88); margin: 1.25rem 0 2rem; max-width: 56ch; }
