@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b4750"/>
+      <stop offset="1" stop-color="#171c1f"/>
+    </linearGradient>
+    <linearGradient id="house" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b2320"/>
+      <stop offset="1" stop-color="#100d0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <rect y="700" width="1600" height="300" fill="#0d0f10"/>
+  <!-- house silhouette -->
+  <g fill="url(#house)">
+    <polygon points="150,520 550,300 950,520 950,760 150,760"/>
+    <rect x="230" y="560" width="90" height="140"/>
+    <rect x="380" y="560" width="90" height="90" opacity="0.85"/>
+    <rect x="560" y="560" width="90" height="90" opacity="0.6"/>
+    <rect x="700" y="600" width="130" height="160"/>
+  </g>
+  <!-- boarded window (plywood) -->
+  <rect x="380" y="560" width="90" height="90" fill="#8a6a3f" opacity="0.55"/>
+  <line x1="380" y1="560" x2="470" y2="650" stroke="#5c4326" stroke-width="4"/>
+  <line x1="470" y1="560" x2="380" y2="650" stroke="#5c4326" stroke-width="4"/>
+  <!-- scaffolding / damage lines -->
+  <g stroke="#4a4340" stroke-width="3" opacity="0.6">
+    <line x1="950" y1="520" x2="1050" y2="420"/>
+    <line x1="1050" y1="420" x2="1050" y2="700"/>
+    <line x1="1050" y1="500" x2="950" y2="560"/>
+    <line x1="1050" y1="600" x2="950" y2="640"/>
+  </g>
+  <!-- smoke haze -->
+  <g fill="#5c5b58" opacity="0.18">
+    <ellipse cx="600" cy="330" rx="260" ry="90"/>
+    <ellipse cx="820" cy="280" rx="200" ry="70"/>
+  </g>
+  <!-- ground debris -->
+  <g fill="#171514" opacity="0.5">
+    <rect x="180" y="760" width="700" height="14"/>
+    <rect x="900" y="770" width="300" height="10"/>
+  </g>
+  <rect width="1600" height="1000" fill="#020e15" opacity="0.25"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f2f3f"/>
+      <stop offset="1" stop-color="#0d1a2d"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <g opacity="0.08" fill="#ffffff">
+    <circle cx="700" cy="80" r="180"/>
+    <circle cx="60" cy="540" r="140"/>
+  </g>
+  <g transform="translate(400,260)" fill="none" stroke="#e3b23c" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M-60,0 L 0,-55 L 60,0"/><path d="M-45,-10 V 55 H 45 V -10"/><path d="M-12,55 V 20 H 12 V 55"/>
+  </g>
+  <text x="400" y="430" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="600" fill="#ffffff" opacity="0.85">Commercial Property Claim — South Jersey</text>
+  <text x="400" y="470" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#ffffff" opacity="0.5">Project photo coming soon</text>
+</svg>
