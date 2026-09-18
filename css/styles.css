@@ -206,12 +206,19 @@ h3 { font-size: 1.05rem; }
   min-height: 640px;
   display: flex;
   align-items: flex-end;
-  background: linear-gradient(0deg, rgba(4,15,22,0.88) 0%, rgba(4,15,22,0.55) 45%, rgba(4,15,22,0.35) 100%), var(--hero-img, none);
   background-size: cover;
   background-position: center;
   color: rgba(255,255,255,0.9);
+  overflow: hidden;
 }
-.hero-inner { position: relative; padding-top: clamp(3rem, 8vw, 5rem); padding-bottom: clamp(3rem, 6vw, 4rem); width: 100%; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(4,15,22,0.88) 0%, rgba(4,15,22,0.55) 45%, rgba(4,15,22,0.35) 100%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; padding-top: clamp(3rem, 8vw, 5rem); padding-bottom: clamp(3rem, 6vw, 4rem); width: 100%; }
 .hero .eyebrow-white { color: var(--white); font-size: 1.05rem; font-weight: 700; text-align: right; margin-bottom: 1rem; }
 .hero h1 { color: var(--white); max-width: 16ch; font-size: clamp(2.4rem, 6vw, 4rem); }
 .hero .lead { color: rgba(255,255,255,0.88); margin: 1.25rem 0 2rem; max-width: 56ch; }
