@@ -366,11 +366,18 @@ h3 { font-size: 1.05rem; }
 .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 @media (max-width: 950px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .card-grid { grid-template-columns: 1fr; } }
-.claim-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.5rem; box-shadow: var(--shadow); transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+.claim-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
 .claim-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.claim-photo { aspect-ratio: 4/3; overflow: hidden; background: var(--navy-black); }
+.claim-photo img { width: 100%; height: 100%; object-fit: cover; }
+.claim-card-body { padding: 1.5rem 1.5rem 1.7rem; }
 .claim-icon { width: 48px; height: 48px; border-radius: 10px; background: rgba(152,27,30,0.08); color: var(--maroon); display: grid; place-items: center; margin-bottom: 1.1rem; }
 .claim-card h3 { margin-bottom: 0.5rem; }
 .claim-card p { font-size: 0.92rem; }
+.claim-label { display: inline-block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+.claim-label.c-fire { color: var(--maroon); }
+.claim-label.c-flood { color: var(--navy); }
+.claim-label.c-wind { color: var(--gray-light); }
 
 /* ============================================================
    Trusted clients
