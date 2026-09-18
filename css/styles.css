@@ -533,7 +533,7 @@ body.modal-open { overflow: hidden; }
 .site-footer { background: var(--white); border-top: 1px solid var(--line); padding: clamp(2.5rem, 6vw, 4rem) 0 1.75rem; font-size: 0.9rem; color: var(--gray); }
 .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; margin-bottom: 2.25rem; align-items: start; }
 @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; } }
-.footer-shield { width: 44px; height: 44px; margin-bottom: 1rem; color: var(--navy-black); }
+.footer-shield { width: 84px; height: auto; margin-bottom: 1.1rem; display: block; }
 .footer-brand p { font-size: 0.88rem; margin-top: 0.5rem; }
 .site-footer h4 { color: var(--navy); font-size: 1.05rem; margin-bottom: 0.9rem; }
 .footer-contact-btn { display: block; text-align: center; background: var(--bg); border-radius: 999px; padding: 0.75rem 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.7rem; font-size: 0.92rem; }
