@@ -437,6 +437,57 @@ h3 { font-size: 1.05rem; }
 .filter-btn.active { background: var(--maroon); border-color: var(--maroon); color: var(--white); }
 
 /* ============================================================
+   Gallery mobile carousel (2 rows) + "All Images" modal
+   ============================================================ */
+.gallery-mobile-carousel { display: none; }
+@media (max-width: 700px) {
+  .gallery-grid { display: none; }
+  .gallery-mobile-carousel { display: block; }
+}
+.carousel-row {
+  overflow: hidden;
+  margin-bottom: 10px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.carousel-track { display: flex; gap: 8px; width: max-content; padding: 4px 0; }
+.carousel-track img { width: 110px; height: 110px; object-fit: cover; border-radius: 8px; flex: none; }
+.carousel-row.row-a .carousel-track { animation: carousel-left 38s linear infinite; }
+.carousel-row.row-b .carousel-track { animation: carousel-right 32s linear infinite; }
+@keyframes carousel-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes carousel-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.carousel-row:hover .carousel-track, .carousel-row:focus-within .carousel-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .carousel-row.row-a .carousel-track, .carousel-row.row-b .carousel-track { animation: none; }
+}
+
+.all-images-btn-wrap { text-align: center; margin-top: 1.4rem; }
+
+.gallery-modal {
+  display: none;
+  position: fixed; inset: 0; z-index: 300;
+  background: var(--white);
+  flex-direction: column;
+}
+.gallery-modal.open { display: flex; }
+.gallery-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem var(--pad); border-bottom: 1px solid var(--line); flex: none;
+}
+.gallery-modal-header h3 { font-size: 1.05rem; margin: 0; }
+.gallery-modal-close {
+  width: 40px; height: 40px; flex: none; border-radius: 50%;
+  background: var(--bg); color: var(--navy);
+  display: grid; place-items: center; font-size: 1.4rem; line-height: 1;
+}
+.gallery-modal-close:hover { background: var(--line); }
+.gallery-modal-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 1rem var(--pad) 2.5rem; }
+.gallery-modal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+@media (min-width: 560px) { .gallery-modal-grid { grid-template-columns: repeat(3, 1fr); } }
+.gallery-modal-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; }
+body.modal-open { overflow: hidden; }
+
+/* ============================================================
    Contact page
    ============================================================ */
 .contact-form-card {

@@ -28,19 +28,35 @@
     });
   }
 
-  /* Gallery filtering */
-  var filterBar = document.querySelector(".filter-bar");
-  if (filterBar) {
-    filterBar.addEventListener("click", function (e) {
-      var btn = e.target.closest(".filter-btn");
-      if (!btn) return;
-      filterBar.querySelectorAll(".filter-btn").forEach(function (b) {
-        b.classList.toggle("active", b === btn);
-      });
-      var cat = btn.dataset.filter;
-      document.querySelectorAll(".gallery-item").forEach(function (item) {
-        item.classList.toggle("hidden", cat !== "all" && item.dataset.category !== cat);
-      });
+  /* Duplicate each mobile gallery carousel track so the loop is seamless */
+  document.querySelectorAll(".carousel-track").forEach(function (track) {
+    Array.prototype.slice.call(track.children).forEach(function (img) {
+      var clone = img.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      clone.removeAttribute("loading");
+      track.appendChild(clone);
+    });
+  });
+
+  /* "All Images" gallery modal */
+  var galleryModal = document.getElementById("galleryModal");
+  var allImagesBtn = document.getElementById("allImagesBtn");
+  var galleryModalClose = document.getElementById("galleryModalClose");
+  if (galleryModal && allImagesBtn && galleryModalClose) {
+    function openGalleryModal() {
+      galleryModal.classList.add("open");
+      galleryModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+    function closeGalleryModal() {
+      galleryModal.classList.remove("open");
+      galleryModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+    allImagesBtn.addEventListener("click", openGalleryModal);
+    galleryModalClose.addEventListener("click", closeGalleryModal);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && galleryModal.classList.contains("open")) closeGalleryModal();
     });
   }
 
