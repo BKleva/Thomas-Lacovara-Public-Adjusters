@@ -166,7 +166,7 @@ h3 { font-size: 1.05rem; }
 .main-nav .btn { padding: 12px 28px; font-size: 0.9rem; }
 
 .header-left { display: flex; align-items: center; gap: 0.9rem; flex: none; }
-.header-badge { display: flex; align-items: center; flex: none; transition: opacity var(--dur) var(--ease); }
+.header-badge { display: flex; align-items: center; gap: 0.7rem; flex: none; transition: opacity var(--dur) var(--ease); }
 .header-badge:hover { opacity: 0.8; }
 .header-badge img { height: 46px; width: auto; display: block; }
 .header-badge-label { display: none; font-weight: 800; color: var(--navy); font-size: 0.9rem; line-height: 1.15; }
