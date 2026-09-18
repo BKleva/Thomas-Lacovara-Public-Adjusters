@@ -169,6 +169,10 @@ h3 { font-size: 1.05rem; }
 .header-badge { display: flex; align-items: center; flex: none; transition: opacity var(--dur) var(--ease); }
 .header-badge:hover { opacity: 0.8; }
 .header-badge img { height: 46px; width: auto; display: block; }
+.header-badge-label { display: none; font-weight: 800; color: var(--navy); font-size: 0.9rem; line-height: 1.15; }
+body.nav-open .header-badge-label { display: block; }
+
+.nav-btn-mobile { display: none; }
 
 .nav-toggle {
   display: none;
@@ -200,6 +204,8 @@ h3 { font-size: 1.05rem; }
   .main-nav.open { display: flex; }
   .main-nav a:not(.btn) { padding: 0.9rem var(--pad); border-bottom: 1px solid var(--line); }
   .main-nav .btn { margin: 1rem var(--pad) 0; justify-content: center; }
+  .nav-btn-desktop { display: none; }
+  .nav-btn-mobile { display: inline-flex; }
   .emergency-badge .txt { display: none; }
 }
 
