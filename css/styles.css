@@ -308,6 +308,7 @@ h3 { font-size: 1.05rem; }
 .facts-split p { margin-bottom: 1rem; font-size: 0.96rem; }
 .promise-photo { border-radius: var(--radius); overflow: hidden; margin-top: 1.5rem; box-shadow: var(--shadow); aspect-ratio: 4/3; background: var(--navy); }
 .promise-photo svg { width: 100%; height: 100%; }
+.promise-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 
 /* ============================================================
    Values
