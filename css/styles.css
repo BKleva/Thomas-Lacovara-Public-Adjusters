@@ -293,7 +293,7 @@ h3 { font-size: 1.05rem; }
   display: grid; place-items: center; color: var(--white); font-size: 0.82rem; font-weight: 700;
 }
 .review-top strong { display: block; font-size: 0.88rem; color: var(--navy); line-height: 1.25; }
-.review-top span { display: block; font-size: 0.74rem; color: var(--gray-light); }
+.review-top span:not(.review-avatar) { display: block; font-size: 0.74rem; color: var(--gray-light); }
 .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; }
 .review-card p { font-size: 0.88rem; color: var(--ink); }
 
