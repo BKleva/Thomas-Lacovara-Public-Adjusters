@@ -173,10 +173,8 @@ h3 { font-size: 1.05rem; }
 .emergency-badge .txt .sub {
   display: block;
   color: rgba(255, 255, 255, 0.85);
-  font-size: 0.62rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 600;
 }
 
 .main-nav { display: flex; align-items: center; gap: 1.9rem; }
