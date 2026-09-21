@@ -1,0 +1,15 @@
+# Old WordPress URLs -> new site (301 keeps their SEO value)
+/about-us/*        /              301
+/about-us          /              301
+/about/*           /              301
+/meet-the-team/*   /              301
+/claims/*          /#claims       301
+/type-of-claims/*  /#claims       301
+/testimonials/*    /#testimonials 301
+/reviews/*         /#testimonials 301
+/faq/*             /#faq          301
+/faqs/*            /#faq          301
+/gallery/*         /gallery.html  301
+/contact-us/*      /contact.html  301
+/contact/*         /contact.html  301
+/blog/*            /              301
