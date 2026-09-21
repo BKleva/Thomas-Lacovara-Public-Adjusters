@@ -135,22 +135,49 @@ h3 { font-size: 1.05rem; }
 .emergency-badge {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  border: 2px solid var(--maroon);
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #b32226 0%, var(--maroon) 55%, #7a1315 100%);
   border-radius: 999px;
-  padding: 0.5rem 1.1rem;
+  padding: 0.45rem 1.35rem 0.45rem 0.5rem;
   flex: none;
+  box-shadow: 0 4px 14px rgba(152, 27, 30, 0.35);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.emergency-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(152, 27, 30, 0.5);
 }
 .emergency-badge .icon {
-  width: 30px; height: 30px; flex: none;
+  width: 34px; height: 34px; flex: none;
   border-radius: 50%;
-  background: var(--maroon);
+  background: rgba(255, 255, 255, 0.18);
   color: var(--white);
   display: grid; place-items: center;
+  position: relative;
 }
-.emergency-badge .txt { line-height: 1.2; font-size: 0.8rem; }
-.emergency-badge .txt strong { display: block; color: var(--maroon); font-size: 0.82rem; }
-.emergency-badge .txt a { color: var(--maroon); font-weight: 700; text-decoration: underline; }
+.emergency-badge .icon::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  animation: emergency-pulse 2s var(--ease) infinite;
+}
+@keyframes emergency-pulse {
+  0%   { transform: scale(0.82); opacity: 0.9; }
+  70%  { transform: scale(1.28); opacity: 0; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+.emergency-badge .txt { line-height: 1.25; }
+.emergency-badge .txt strong { display: block; color: var(--white); font-size: 0.86rem; letter-spacing: 0.01em; }
+.emergency-badge .txt .sub {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
 
 .main-nav { display: flex; align-items: center; gap: 1.9rem; }
 .main-nav a:not(.btn) {
