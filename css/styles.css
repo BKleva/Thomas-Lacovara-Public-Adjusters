@@ -102,6 +102,8 @@ h3 { font-size: 1.05rem; }
 .btn-outline { border: 1.5px solid rgba(255,255,255,0.4); color: var(--white); }
 .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
 .btn-ghost-navy { border: 1.5px solid var(--navy); color: var(--navy); }
+.btn-gray { background: var(--gray); color: var(--white); }
+.btn-gray:hover { background: #4d4d4d; transform: translateY(-2px); box-shadow: var(--shadow-lift); }
 .btn-ghost-navy:hover { background: var(--navy); color: var(--white); }
 
 /* ============================================================
