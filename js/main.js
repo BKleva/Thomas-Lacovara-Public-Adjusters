@@ -26,6 +26,21 @@
       clone.setAttribute("aria-hidden", "true");
       track.appendChild(clone);
     });
+
+    /* Tap or click a review to freeze the ticker; tap again or tap elsewhere to resume */
+    var ticker = track.closest(".ticker");
+    if (ticker) {
+      ticker.addEventListener("click", function (e) {
+        if (e.target.closest(".review-card")) {
+          ticker.classList.toggle("is-paused");
+        }
+      });
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".ticker")) {
+          ticker.classList.remove("is-paused");
+        }
+      });
+    }
   }
 
   /* Duplicate each mobile gallery carousel track so the loop is seamless */

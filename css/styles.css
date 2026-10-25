@@ -302,8 +302,9 @@ h3 { font-size: 1.05rem; }
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.ticker-track { display: flex; gap: 1.25rem; width: max-content; animation: ticker-scroll 55s linear infinite; padding: 0.5rem 0; }
-.ticker:hover .ticker-track, .ticker:focus-within .ticker-track { animation-play-state: paused; }
+.ticker-track { display: flex; gap: 1.25rem; width: max-content; animation: ticker-scroll 300s linear infinite; padding: 0.5rem 0; }
+.ticker:hover .ticker-track, .ticker:focus-within .ticker-track, .ticker:active .ticker-track, .ticker.is-paused .ticker-track { animation-play-state: paused; }
+.review-card { cursor: pointer; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 .review-card {
