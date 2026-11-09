@@ -27,19 +27,87 @@
       track.appendChild(clone);
     });
 
-    /* Tap or click a review to freeze the ticker; tap again or tap elsewhere to resume */
+    /* Auto-scroll the ticker, but let people scroll it by hand.
+       - Mouse hover pauses it (mouse only, so touch screens never get stuck frozen)
+       - Any touch, drag, wheel, or manual scroll hands control to the user and
+         auto-scroll resumes a few seconds after they stop */
     var ticker = track.closest(".ticker");
     if (ticker) {
-      ticker.addEventListener("click", function (e) {
-        if (e.target.closest(".review-card")) {
-          ticker.classList.toggle("is-paused");
+      var SPEED = 24;          /* pixels per second */
+      var RESUME_DELAY = 3500; /* ms of no interaction before auto-scroll resumes */
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var half = track.children.length / 2;
+      var pos = 0;
+      var lastSet = 0;
+      var hovering = false;
+      var holding = false;
+      var lastInteraction = 0;
+      var lastFrame = null;
+
+      var touched = function () { lastInteraction = Date.now(); };
+      var period = function () {
+        /* distance from the first card to its clone = one full loop */
+        return track.children[half].offsetLeft - track.children[0].offsetLeft;
+      };
+
+      ticker.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") hovering = true; });
+      ticker.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hovering = false; });
+      ticker.addEventListener("pointerdown", function () { holding = true; touched(); });
+      ["pointerup", "pointercancel"].forEach(function (evt) {
+        window.addEventListener(evt, function () { if (holding) { holding = false; touched(); } });
+      });
+      /* Click-and-drag with a mouse (touch screens already swipe natively) */
+      var dragging = false, dragStartX = 0, dragStartScroll = 0;
+      ticker.addEventListener("pointerdown", function (e) {
+        if (e.pointerType === "mouse" && e.button === 0) {
+          dragging = true;
+          dragStartX = e.clientX;
+          dragStartScroll = ticker.scrollLeft;
+          ticker.classList.add("is-dragging");
         }
       });
-      document.addEventListener("click", function (e) {
-        if (!e.target.closest(".ticker")) {
-          ticker.classList.remove("is-paused");
-        }
+      window.addEventListener("pointermove", function (e) {
+        if (dragging) { ticker.scrollLeft = dragStartScroll - (e.clientX - dragStartX); }
       });
+      ["pointerup", "pointercancel"].forEach(function (evt) {
+        window.addEventListener(evt, function () {
+          dragging = false;
+          ticker.classList.remove("is-dragging");
+        });
+      });
+      ticker.addEventListener("wheel", touched, { passive: true });
+      ticker.addEventListener("touchstart", touched, { passive: true });
+      ticker.addEventListener("keydown", touched);
+
+      /* Scrolls we didn't cause (swipe, drag, trackpad, keyboard) take over the position */
+      ticker.addEventListener("scroll", function () {
+        if (Math.abs(ticker.scrollLeft - lastSet) > 1.5) {
+          pos = ticker.scrollLeft;
+          touched();
+        }
+      }, { passive: true });
+
+      var step = function (now) {
+        if (lastFrame !== null && !reduceMotion) {
+          var dt = Math.min(now - lastFrame, 100) / 1000;
+          var idle = Date.now() - lastInteraction > RESUME_DELAY;
+          if (!hovering && !holding && idle && !document.hidden) {
+            pos += SPEED * dt;
+          }
+          var loop = period();
+          if (loop > 0) {
+            if (pos >= loop) { pos -= loop; }
+            if (pos < 0) { pos += loop; }
+            if (idle || pos !== ticker.scrollLeft) {
+              lastSet = pos;
+              ticker.scrollLeft = pos;
+            }
+          }
+        }
+        lastFrame = now;
+        window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
     }
   }
 

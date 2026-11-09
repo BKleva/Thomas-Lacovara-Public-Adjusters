@@ -295,17 +295,22 @@ h3 { font-size: 1.05rem; }
    Reviews ticker
    ============================================================ */
 .reviews-band { background: var(--bg); overflow: hidden; }
+/* Auto-scrolls via js/main.js; users can also swipe, drag, or scroll it by hand */
 .ticker {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   padding: 0.5rem 0 0.75rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.ticker-track { display: flex; gap: 1.25rem; width: max-content; animation: ticker-scroll 300s linear infinite; padding: 0.5rem 0; }
-.ticker:hover .ticker-track, .ticker:focus-within .ticker-track, .ticker:active .ticker-track, .ticker.is-paused .ticker-track { animation-play-state: paused; }
-.review-card { cursor: pointer; }
-@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker::-webkit-scrollbar { display: none; }
+@media (hover: hover) and (pointer: fine) { .ticker { cursor: grab; } }
+.ticker.is-dragging { cursor: grabbing; user-select: none; -webkit-user-select: none; }
+.ticker-track { display: flex; gap: 1.25rem; width: max-content; padding: 0.5rem 0; }
 
 .review-card {
   flex: none; width: min(320px, 82vw);
@@ -327,6 +332,17 @@ h3 { font-size: 1.05rem; }
 
 .reviews-footer { text-align: center; margin-top: 1.5rem; }
 .reviews-footer .g-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 600; color: var(--gray); }
+
+.review-cta {
+  max-width: 640px; margin: 2rem auto 0; text-align: center;
+  background: var(--white); border-radius: 14px; box-shadow: var(--shadow);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+.review-cta h3 { font-size: 1.25rem; }
+.review-cta p { margin: 0.6rem auto 1.4rem; font-size: 0.95rem; max-width: 46ch; }
+.review-cta-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem 1.5rem; }
+.review-cta-link { color: var(--navy); font-weight: 700; font-size: 0.92rem; text-decoration: underline; text-underline-offset: 3px; }
+.review-cta-link:hover { color: var(--maroon); }
 
 /* ============================================================
    Facts / Promise split
