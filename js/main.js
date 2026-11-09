@@ -33,7 +33,7 @@
          auto-scroll resumes a few seconds after they stop */
     var ticker = track.closest(".ticker");
     if (ticker) {
-      var SPEED = 24;          /* pixels per second (changed by the speed buttons) */
+      var SPEED = 24;          /* pixels per second */
       var RESUME_DELAY = 3500; /* ms of no interaction before auto-scroll resumes */
       var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var half = track.children.length / 2;
@@ -102,15 +102,6 @@
             var base = glideTarget !== null ? glideTarget : pos;
             glideTarget = base + dir * cardStep;
             touched();
-          });
-        });
-        Array.prototype.forEach.call(controls.querySelectorAll(".tc-speed button"), function (btn) {
-          btn.addEventListener("click", function () {
-            SPEED = Number(btn.getAttribute("data-speed"));
-            lastInteraction = 0; /* pick the drift back up right away */
-            Array.prototype.forEach.call(controls.querySelectorAll(".tc-speed button"), function (b) {
-              b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-            });
           });
         });
         if (slider) {

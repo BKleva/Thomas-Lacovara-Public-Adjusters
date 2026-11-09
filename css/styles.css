@@ -343,7 +343,7 @@ h3 { font-size: 1.05rem; }
 }
 .tc-arrow:hover { background: var(--maroon); color: var(--white); }
 .tc-arrow:active { transform: scale(0.93); }
-.tc-arrow:focus-visible, .tc-speed button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.tc-arrow:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .tc-slider {
   flex: 1; min-width: 0; height: 28px; margin: 0; background: transparent;
   -webkit-appearance: none; appearance: none; cursor: pointer; touch-action: pan-y;
@@ -358,16 +358,6 @@ h3 { font-size: 1.05rem; }
   width: 20px; height: 20px; border-radius: 50%; background: var(--maroon); border: 3px solid var(--white); box-shadow: 0 1px 5px rgba(0,0,0,0.35);
 }
 .tc-slider:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 99px; }
-.tc-speed { display: inline-flex; align-items: center; gap: 0.35rem; }
-.tc-speed-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray); margin-right: 0.4rem; }
-.tc-speed button {
-  cursor: pointer; font: inherit; font-size: 0.85rem; font-weight: 700;
-  padding: 0.45rem 0.95rem; border-radius: 99px; min-height: 36px;
-  background: var(--white); color: var(--navy); border: 1.5px solid rgba(152,27,30,0.25);
-  transition: background .18s, color .18s; touch-action: manipulation;
-}
-.tc-speed button:hover { border-color: var(--maroon); color: var(--maroon); }
-.tc-speed button[aria-pressed="true"] { background: var(--maroon); border-color: var(--maroon); color: var(--white); }
 
 .reviews-footer { text-align: center; margin-top: 1.5rem; }
 .reviews-footer .g-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 600; color: var(--gray); }
