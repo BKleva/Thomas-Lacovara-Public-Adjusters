@@ -33,7 +33,7 @@
          auto-scroll resumes a few seconds after they stop */
     var ticker = track.closest(".ticker");
     if (ticker) {
-      var SPEED = 24;          /* pixels per second */
+      var SPEED = 24;          /* pixels per second (changed by the speed buttons) */
       var RESUME_DELAY = 3500; /* ms of no interaction before auto-scroll resumes */
       var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var half = track.children.length / 2;
@@ -87,20 +87,72 @@
         }
       }, { passive: true });
 
+      /* Controls under the ticker: arrows, scrub bar, speed buttons */
+      var controls = document.querySelector(".ticker-controls");
+      var slider = controls && controls.querySelector(".tc-slider");
+      var glideTarget = null;   /* position an arrow click is easing toward */
+      var scrubbing = false;    /* true while the scrub bar thumb is held */
+      var SLIDER_MAX = slider ? Number(slider.max) : 0;
+
+      if (controls) {
+        Array.prototype.forEach.call(controls.querySelectorAll(".tc-arrow"), function (btn) {
+          btn.addEventListener("click", function () {
+            var dir = Number(btn.getAttribute("data-dir"));
+            var cardStep = track.children[1].offsetLeft - track.children[0].offsetLeft;
+            var base = glideTarget !== null ? glideTarget : pos;
+            glideTarget = base + dir * cardStep;
+            touched();
+          });
+        });
+        Array.prototype.forEach.call(controls.querySelectorAll(".tc-speed button"), function (btn) {
+          btn.addEventListener("click", function () {
+            SPEED = Number(btn.getAttribute("data-speed"));
+            lastInteraction = 0; /* pick the drift back up right away */
+            Array.prototype.forEach.call(controls.querySelectorAll(".tc-speed button"), function (b) {
+              b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+            });
+          });
+        });
+        if (slider) {
+          slider.addEventListener("pointerdown", function () { scrubbing = true; });
+          ["pointerup", "pointercancel"].forEach(function (evt) {
+            window.addEventListener(evt, function () { scrubbing = false; });
+          });
+          slider.addEventListener("input", function () {
+            var loop = period();
+            if (loop > 0) {
+              glideTarget = null;
+              pos = (Number(slider.value) / SLIDER_MAX) * loop;
+              lastSet = pos;
+              ticker.scrollLeft = pos;
+              touched();
+            }
+          });
+        }
+      }
+
       var step = function (now) {
-        if (lastFrame !== null && !reduceMotion) {
+        if (lastFrame !== null) {
           var dt = Math.min(now - lastFrame, 100) / 1000;
           var idle = Date.now() - lastInteraction > RESUME_DELAY;
-          if (!hovering && !holding && idle && !document.hidden) {
+          if (glideTarget !== null) {
+            /* ease toward the arrow target; counts as interaction so drift waits */
+            touched();
+            pos += (glideTarget - pos) * Math.min(1, dt * 9);
+            if (Math.abs(glideTarget - pos) < 0.6) { pos = glideTarget; glideTarget = null; }
+          } else if (!reduceMotion && !hovering && !holding && idle && !document.hidden) {
             pos += SPEED * dt;
           }
           var loop = period();
           if (loop > 0) {
-            if (pos >= loop) { pos -= loop; }
-            if (pos < 0) { pos += loop; }
-            if (idle || pos !== ticker.scrollLeft) {
+            while (pos >= loop) { pos -= loop; if (glideTarget !== null) glideTarget -= loop; }
+            while (pos < 0) { pos += loop; if (glideTarget !== null) glideTarget += loop; }
+            if (idle || glideTarget !== null || pos !== ticker.scrollLeft) {
               lastSet = pos;
               ticker.scrollLeft = pos;
+            }
+            if (slider && !scrubbing) {
+              slider.value = Math.round((pos / loop) * SLIDER_MAX);
             }
           }
         }
